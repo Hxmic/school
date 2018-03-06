@@ -2,3 +2,7 @@
 modules.xml
 school.iml
 vcs.xml
+
+# ignore file #
+/node_modules/
+/.idea/
