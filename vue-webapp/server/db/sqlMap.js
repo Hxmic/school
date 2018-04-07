@@ -1,6 +1,6 @@
 var sqlMap = {
     user: {
-        login: 'select * from admin;',
+        login: 'select username from admin where username = ?;',
         register: 'insert into admin(username, userpsw) values(?, ?)',
     }
 }

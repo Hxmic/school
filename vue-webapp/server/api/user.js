@@ -8,8 +8,23 @@ var conn = mysql.createConnection(models.mysql);
 conn.connect();
 
 
-router.get('/signin',(req, res) => {
+router.post('/api/signin',(req, res) => {
     let sql = $sql.user.login;
+    let params = req.body;
+    
+    conn.query(sql, [params.username], (err, result) => {
+        if(err) {
+            res.send(err);
+        }
+        if(result) {
+            console.log(result);
+            res.json(result);
+        }
+    })
+})
+
+router.get('/register',(req, res) => {
+    let sql = $sql.user.register;
     let params = req.body;
     
     conn.query(sql, [params.username, params.userpsw], (err, result) => {
@@ -17,8 +32,7 @@ router.get('/signin',(req, res) => {
             res.send(err);
         }
         if(result) {
-            console.log(result);
-            res.json({status:200,data:result});
+            console.log(result)
         }
     })
 })
