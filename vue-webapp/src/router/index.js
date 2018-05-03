@@ -1,14 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Test = () => import(/* webpackChunkName: "out"*/ '@/components/test')
-const Login = () => import(/* webpackChunkName: "out"*/ '@/components/login')
+const Test = () => import(/* webpackChunkName: "out"*/ '@/views/test')
+const Login = () => import(/* webpackChunkName: "out"*/ '@/views/login')
+const Register = () => import(/* webpackChunkName: "out"*/ '@/views/register')
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/',
+      redirect: '/login'
+    },
     {
       path: '/test',
       name: 'Test',
@@ -18,6 +23,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ]
 })
