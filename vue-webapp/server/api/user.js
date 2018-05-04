@@ -61,7 +61,7 @@ router.post('/delete_user', function(req, res) {
         }
     })
 })
-// 修改
+// 可以完成修改（写法有点复杂）
 router.post('/update_user', function(req, res) {
     let params = req.body;
     
