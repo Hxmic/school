@@ -1,5 +1,16 @@
 <template>
-  <div>
-      我是主页
-  </div>
+  <el-row class="container" style="heitht: 100%">
+	  <v-header ></v-header>
+  </el-row>
 </template>
+
+<script>
+
+import header from '@/components/header'
+export default {
+  
+  components: {
+	  'v-header' : header
+  }
+}
+</script>
