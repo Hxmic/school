@@ -52,10 +52,16 @@ export default {
               username: loginParams.username,
               password: loginParams.password
             },{}).then(function(data) {
+              // console.log(data)
               if(data.body.code == 0 ) {
                   this.$message.error('用户不存在');
               } else {
-                  this.$router.push('/home')
+                  this.$router.push({
+                    path: '/home',
+                    query: {
+                      username: this.ruleForm2.account
+                    }
+                  })
               }
             })
 

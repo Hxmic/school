@@ -40,7 +40,7 @@
 					<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-				<span class="userinfo">王小虎</span>
+				<span class="userinfo">{{userName}}</span>
 		</el-header>
 
 
@@ -105,7 +105,8 @@
         data(){
             return {
                 searchCriteria: '',
-                breadcrumbItems: ['导航一'],
+				breadcrumbItems: ['导航一'],
+				userName: '用户',
 				dataNav:{
 					data:[
 						{
@@ -146,12 +147,32 @@
 					]
 				}
             }
-        },
-
+		},
+		created() {
+			this.getParams();
+		},
         methods:{
             handleIconClick(ev) {
                 console.log(ev);
-            }
+			},
+			
+			// 获取参数
+			getParams() {
+				let name = this.$route.query.username;
+				this.userName = name;
+			},
+			// 退出登录
+			logout() {
+				var _this = this;
+				this.$confirm('确认退出吗?', '提示', {
+					//type: 'warning'
+				}).then(() => {
+					sessionStorage.removeItem('userName');
+					_this.$router.push('/login');
+				}).catch(() => {
+
+				});
+			}
         },
     }
 </script>
