@@ -1,33 +1,6 @@
 <template>
 
 	<el-row class="container">
-		<!-- <el-col :span="24" class="header">
-			<el-col style="width:230px" class="logo" >
-				商场导购系统
-			</el-col>
-			<el-col :span="10">
-				
-			</el-col>
-			<el-col :span="4" class="userinfo">
-				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner"><img src="../assets/group-head-img.png" /> 张三</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>我的消息</el-dropdown-item>
-						<el-dropdown-item>设置</el-dropdown-item>
-						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-					</el-dropdown-menu>
-				</el-dropdown>
-			</el-col>
-		</el-col> -->
-
-		<!-- <el-col :span="24" class="header">
-			<el-col style="width:230px" class="logo" >
-				商场导购系统
-			</el-col>
-			
-		</el-col> -->
-
-
 		<el-header :span="24" class="header">
 			
 				<el-col style="width:230px" class="logo" >
@@ -44,57 +17,64 @@
 		</el-header>
 
 
-		 <el-row style="margin-top:5px">
-            <el-row :gutter="10" class="el-menu-vertical-demo">
-                <el-col style="width:240px">
-					<!-- :default-openeds="['1', '3']" 设置默认打开 -->
-                    <el-menu  style="min-height:auto" 
-						v-for="(item, index) in dataNav.data"
-						:key="index"
-					>
-					<el-submenu index="1">
-						<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
-						<!-- <el-menu-item-group>
-						<template slot="title">分组一</template>
-							<el-menu-item index="1-1">选项1</el-menu-item>
-							<el-menu-item index="1-2">选项2</el-menu-item>
-						</el-menu-item-group> -->
-						<el-menu-item index="1-1">{{item.first}}</el-menu-item>
-						<el-menu-item index="1-2">{{item.second}}</el-menu-item>
-						
-					</el-submenu>
-					<!-- <el-submenu index="2">
-						<template slot="title"><i class="el-icon-menu"></i>导航二</template>
-						<el-menu-item-group>
-						<template slot="title">分组一</template>
-						<el-menu-item index="2-1">选项1</el-menu-item>
-						<el-menu-item index="2-2">选项2</el-menu-item>
-						</el-menu-item-group>
-						<el-menu-item-group title="分组2">
-						<el-menu-item index="2-3">选项3</el-menu-item>
-						</el-menu-item-group>
-						<el-submenu index="2-4">
-						<template slot="title">选项4</template>
-						<el-menu-item index="2-4-1">选项4-1</el-menu-item>
-						</el-submenu>
-					</el-submenu> -->
-					
-					</el-menu>
-                </el-col>
-                  <el-main>
-						<!-- <el-table >
-							<el-table-column prop="date" label="日期" width="140">
-							</el-table-column>
-							<el-table-column prop="name" label="姓名" width="120">
-							</el-table-column>
-							<el-table-column prop="address" label="地址">
-							</el-table-column>
-						</el-table> -->
-						<router-view></router-view>
-					</el-main>
-				</el-row>
-        </el-row>
-		
+		 <el-col :span="24" class="main">
+			<aside >
+				<!--导航菜单-->
+				<el-menu  class="el-menu-vertical-demo" :default-active="$route.path" unique-opened router>
+					<div v-for="(item, index) in dataNav.data" :key="index" >
+						<el-menu >
+							<div v-if="index == 0">
+								
+								<el-menu-item index="1-1">
+									<i class="el-icon-message"></i>{{item.name}}
+								</el-menu-item>
+							</div>
+							<el-submenu index="1" v-else>
+								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
+								<el-menu-item-group>
+									
+									<el-menu-item index="1-1">{{item.first}}</el-menu-item>
+									<el-menu-item index="1-2">{{item.second}}</el-menu-item>
+								</el-menu-item-group>
+							</el-submenu>
+						</el-menu>
+
+
+						<!-- <el-menu-item v-if="index == 0"> 
+							<i class="el-icon-message"></i>
+							{{item.name}}
+						</el-menu-item>
+						<el-submenu index v-else>
+								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
+								<el-menu-item > 
+									{{item.first}}
+								</el-menu-item>
+								<el-menu-item>
+									{{item.second}}
+								</el-menu-item>
+						</el-submenu> -->
+					</div>
+				</el-menu>
+				
+			</aside>
+			<section class="content-container">
+				<div class="grid-content bg-purple-light">
+					<el-col :span="24" class="breadcrumb-container">
+						<strong class="title">{{$route.name}}</strong>
+						<el-breadcrumb separator="/" class="breadcrumb-inner">
+							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+								{{ item.name }}
+							</el-breadcrumb-item>
+						</el-breadcrumb>
+					</el-col>
+					<el-col :span="24" class="content-wrapper">
+						<transition name="fade" mode="out-in">
+							<router-view></router-view>
+						</transition>
+					</el-col>
+				</div>
+			</section>
+		</el-col>
 
 	</el-row>
 
@@ -104,35 +84,29 @@
     export default {
         data(){
             return {
-                searchCriteria: '',
-				breadcrumbItems: ['导航一'],
 				userName: '用户',
+				collapsed: false,
 				dataNav:{
 					data:[
 						{
 							name: '主页',
-							first: '第一个',
-							second: '第二个'
+							route: '/main'
 						},
 						{
 							name: '人员管理',
-							first: '第一个',
-							second: '第二个'
+							first: '个人信息',
+							second: '用户管理',
+							route: '/test'
 						},
 						{
 							name: '商品管理',
-							first: '第一个',
-							second: '第二个'
+							first: '商品',
+							second: '打折促销商品'
 						},
 						{
 							name: '商品销售位置查询',
-							first: '第一个',
-							second: '第二个'
-						},
-						{
-							name: '商品打折促销管理',
-							first: '第一个',
-							second: '第二个'
+							first: '楼层查询',
+							second: '商品位置查询'
 						},
 						{
 							name: '商场活动推介管理',
@@ -152,10 +126,6 @@
 			this.getParams();
 		},
         methods:{
-            handleIconClick(ev) {
-                console.log(ev);
-			},
-			
 			// 获取参数
 			getParams() {
 				let name = this.$route.query.username;

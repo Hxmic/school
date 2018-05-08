@@ -57,7 +57,7 @@ export default {
                   this.$message.error('用户不存在');
               } else {
                   this.$router.push({
-                    path: '/home',
+                    path: '/main',
                     query: {
                       username: this.ruleForm2.account
                     }

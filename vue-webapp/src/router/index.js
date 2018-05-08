@@ -7,8 +7,9 @@ const Register = () => import(/* webpackChunkName: "out"*/ '@/views/register')
 const Home = () => import(/* webpackChunkName: "out"*/ '@/views/home')
 
 const Main = () => import(/* webpackChunkName: "out"*/ '@/views/main')
+const Table = () => import(/* webpackChunkName: "out"*/ '@/views/table')
 
-
+// const Table = () => import(/* webpackChunkName: "out"*/ '@/views/table')
 
 Vue.use(Router)
 
@@ -37,11 +38,17 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home,
+      redirect: '/main', // 登录后直接映射到main
       children: [
         {
           path: '/main',
           component: Main,
           name: 'Main'
+        }, 
+        {
+          path: '/table',
+          component: Table,
+          name: 'Table'
         }
       ]
     }
