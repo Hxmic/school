@@ -9,6 +9,10 @@ const Home = () => import(/* webpackChunkName: "out"*/ '@/views/home')
 const Main = () => import(/* webpackChunkName: "out"*/ '@/views/main')
 const Table = () => import(/* webpackChunkName: "out"*/ '@/views/table')
 
+const Person = () => import(/* webpackChunkName: "out"*/ '@/views/person')
+const UserTable = () => import(/* webpackChunkName: "out"*/ '@/views/userTable')
+
+
 // const Table = () => import(/* webpackChunkName: "out"*/ '@/views/table')
 
 Vue.use(Router)
@@ -44,7 +48,17 @@ export default new Router({
           path: '/main',
           component: Main,
           name: 'Main'
-        }, 
+        },
+        {
+          path: '/person',
+          component: Person,
+          name: 'Person'
+        },
+        {
+          path: '/user_table',
+          component: UserTable,
+          name: 'UserTable'
+        },
         {
           path: '/table',
           component: Table,

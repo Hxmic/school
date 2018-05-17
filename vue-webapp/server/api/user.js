@@ -12,7 +12,7 @@ router.post('/login', function (req, res) {
     
     let params = req.body;
 
-    conn.query('select username from admin where username="' + params.username + '" and password="' + params.password+'"', function (err, rows) {
+    conn.query('select username from usersql where username="' + params.username + '" and password="' + params.password+'"', function (err, rows) {
       if (err || rows.length == 0) {
         console.log(err)
         res.send({code: 0})
@@ -25,10 +25,10 @@ router.post('/login', function (req, res) {
 // 可以完成注册
 router.post('/register', function(req, res) {
     let params = req.body;
-    conn.query('select username from admin where username="' + params.username + '"', function(err, rows) {
+    conn.query('select username from usersql where username="' + params.username + '"', function(err, rows) {
         if(err || rows.length == 0) {
             console.log(err);
-            conn.query('insert into admin set ?', {username: params.username,password:params.password}, function(err, rows) {
+            conn.query('insert into usersql set ?', {username: params.username,password:params.password}, function(err, rows) {
                 if(err) {
                     console.log(err);
                     res.send({code: 0, ms: '服务器出错'})
@@ -45,12 +45,12 @@ router.post('/register', function(req, res) {
 router.post('/delete_user', function(req, res) {
     let params = req.body;
 
-    conn.query('select username from admin where username="' + params.username + '"', function(err, rows) {
+    conn.query('select username from usersql where username="' + params.username + '"', function(err, rows) {
         if(err || rows.length == 0) {
             res.send({code: 0, ms: '账户不存在'})
             console.log(err);
         } else {
-            conn.query('delete from admin where username="' + params.username + '"', function(err, rows) {
+            conn.query('delete from usersql where username="' + params.username + '"', function(err, rows) {
                 if(err) {
                     console.log(err)
                     res.send({code: 0})
@@ -65,7 +65,7 @@ router.post('/delete_user', function(req, res) {
 router.post('/update_user', function(req, res) {
     let params = req.body;
     
-    conn.query('update admin set username = "'+params.username + '" ,password = "' + params.password + '" where username = "' + params.username + '"', function(err, result) {
+    conn.query('update usersql set username = "'+params.username + '" ,password = "' + params.password + '" where username = "' + params.username + '"', function(err, result) {
         !err ? res.send({code: 1}) : res.send({code: 0})
 
     })

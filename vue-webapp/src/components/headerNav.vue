@@ -24,17 +24,27 @@
 					<div v-for="(item, index) in dataNav.data" :key="index" >
 						<el-menu >
 							<div v-if="index == 0">
-								
-								<el-menu-item index="1-1">
-									<i class="el-icon-message"></i>{{item.name}}
-								</el-menu-item>
+								<router-link :to="`${item.route}`">
+									<el-menu-item index="1-1">
+											<i class="el-icon-message"></i>{{item.name}}
+									</el-menu-item>
+								</router-link>
+
 							</div>
 							<el-submenu index="1" v-else>
 								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
 								<el-menu-item-group>
 									
-									<el-menu-item index="1-1">{{item.first}}</el-menu-item>
-									<el-menu-item index="1-2">{{item.second}}</el-menu-item>
+									<router-link :to="`${item.routeFirst}`">
+										<el-menu-item index="1-1">
+												{{item.first}}
+										</el-menu-item>
+									</router-link>
+									<router-link :to="`${item.routeSecond}`">
+										<el-menu-item index="1-2">
+												{{item.second}}
+										</el-menu-item>
+									</router-link>
 								</el-menu-item-group>
 							</el-submenu>
 						</el-menu>
@@ -96,12 +106,14 @@
 							name: '人员管理',
 							first: '个人信息',
 							second: '用户管理',
-							route: '/test'
+							routeFirst: '/person',
+							routeSecond: '/user_table'
 						},
 						{
 							name: '商品管理',
 							first: '商品',
-							second: '打折促销商品'
+							second: '打折促销商品',
+							route: '/main'
 						},
 						{
 							name: '商品销售位置查询',
