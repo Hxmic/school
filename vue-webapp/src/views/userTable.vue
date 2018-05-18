@@ -6,7 +6,7 @@
     >
      <el-table-column
       prop="name"
-      label="姓名"
+      label="用户名"
       sortable
       width="150">
     </el-table-column>
@@ -64,7 +64,7 @@
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-04',
-          name: '王小虎',
+          name: 'wang',
           email: '844863123@qq.com',
           sex: '男',
           address: '上海市普陀区金沙江路 1517 弄'
@@ -72,13 +72,13 @@
           date: '2016-05-01',
           sex: '男',
           email: '844863123@qq.com',
-          name: '王小虎',
+          name: '李四',
           address: '上海市普陀区金沙江路 1519 弄'
         }, {
           date: '2016-05-03',
           sex: '女',
           email: '844863123@qq.com',
-          name: '王小虎',
+          name: 'root',
           address: '上海市普陀区金沙江路 1516 弄'
         }]
       }

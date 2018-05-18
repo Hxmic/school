@@ -113,22 +113,29 @@
 							name: '商品管理',
 							first: '商品',
 							second: '打折促销商品',
-							route: '/main'
+							route: '/main',
+							
 						},
 						{
 							name: '商品销售位置查询',
 							first: '楼层查询',
-							second: '商品位置查询'
+							second: '商品位置查询',
+							routeFirst: '/person',
+							routeSecond: '/goods_table'
 						},
 						{
 							name: '商场活动推介管理',
 							first: '第一个',
-							second: '第二个'
+							second: '第二个',
+							routeFirst: '/person',
+							routeSecond: '/active_table'
 						},
 						{
 							name: '商场管理',
 							first: '第一个',
-							second: '第二个'
+							second: '第二个',
+							routeFirst: '/person',
+							routeSecond: '/market_table'
 						},
 					]
 				}
