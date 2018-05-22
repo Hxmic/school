@@ -1,14 +1,13 @@
 <template>
     <div>
         <div class="">
-            <img src="../assets/goodsimg/introduce.jpg" alt="" class="video">
+            <video src="`${video}`" alt="" class="video">
         </div>
-        <div class="img">
- <img src="../assets/goodsimg/first.jpg" alt="">
-        <img src="../assets/goodsimg/second.jpg" alt="">
-        <img src="../assets/goodsimg/three.jpg" alt="">
+        <div class="img" v-for="item in active" :key="item">
+            <a href="item.push">
+                <img :src="item.img" alt="">
+            </a>
         </div>
-       
     </div>
 </template>
 

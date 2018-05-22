@@ -1,5 +1,4 @@
 <template>
-
 	<el-row class="container">
 		<el-header :span="24" class="header">
 			
@@ -48,21 +47,6 @@
 								</el-menu-item-group>
 							</el-submenu>
 						</el-menu>
-
-
-						<!-- <el-menu-item v-if="index == 0"> 
-							<i class="el-icon-message"></i>
-							{{item.name}}
-						</el-menu-item>
-						<el-submenu index v-else>
-								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
-								<el-menu-item > 
-									{{item.first}}
-								</el-menu-item>
-								<el-menu-item>
-									{{item.second}}
-								</el-menu-item>
-						</el-submenu> -->
 					</div>
 				</el-menu>
 				
@@ -85,10 +69,7 @@
 				</div>
 			</section>
 		</el-col>
-
 	</el-row>
-
-    
 </template>
 <script type="text/ecmascript-6">
     export default {
@@ -113,7 +94,10 @@
 							name: '商品管理',
 							first: '商品',
 							second: '打折促销商品',
+							third: '商品主页',
 							route: '/main',
+							routeFirst: '/goods_table',
+							routeSecond: '/goods_table'
 							
 						},
 						{
@@ -125,15 +109,15 @@
 						},
 						{
 							name: '商场活动推介管理',
-							first: '第一个',
-							second: '第二个',
+							first: '最新推广',
+							second: '活动',
 							routeFirst: '/person',
 							routeSecond: '/active_table'
 						},
 						{
 							name: '商场管理',
-							first: '第一个',
-							second: '第二个',
+							first: '商场主页',
+							second: '商场',
 							routeFirst: '/person',
 							routeSecond: '/market_table'
 						},

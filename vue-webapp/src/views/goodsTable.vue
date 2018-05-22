@@ -34,12 +34,6 @@
         width="100">
         </el-table-column>
 
-
-        <el-table-column
-        prop="comment"
-        label="好评率"
-        width="100">
-        </el-table-column>
     
         <el-table-column
         prop="datetime"

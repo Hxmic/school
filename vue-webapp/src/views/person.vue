@@ -16,11 +16,7 @@
       sortable
       width="180">
     </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址"
-      :formatter="formatter">
-    </el-table-column>
+   
   </el-table>
 </template>
 

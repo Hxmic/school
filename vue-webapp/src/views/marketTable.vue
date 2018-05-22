@@ -16,9 +16,6 @@
       label="商场简介"
       width="150">
     </el-table-column>
-
-  
-
     <el-table-column
       prop="important"
       label="主营业务"
@@ -81,6 +78,33 @@
     methods: {
       formatter(row, column) {
         return row.address;
+      },
+      getInfo() {
+          var _this = this;
+        this.$refs.ruleForm2.validate((valid) => {
+          if (valid) {
+            
+            var url = '/api/marketinfo';
+            this.$http.post(url, {
+            },{}).then(function(data) {
+              // console.log(data)
+              let info = data.body.data;
+              if(data.body.data == 0 ) {
+                  this.$message.error('信息为空');
+              } else {
+                  _this.tableData.name = info.name;
+                  _this.tableData.introduce = info.introduce;
+                  _this.tableData.phone = info.phone;
+                  _this.tableData.important = info.important;
+                  _this.tableData.address = info.address;
+              }
+            })
+
+          } else {
+            this.$message.error('访问错误');
+            return false;
+          }
+        });
       }
     }
   }

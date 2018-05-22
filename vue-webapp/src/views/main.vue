@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="新品上市" name="first">新品上市</el-tab-pane>
+    <el-tab-pane label="新品推广" name="first">新品上市</el-tab-pane>
     <el-tab-pane label="打折促销商品" name="second">
         <el-carousel :interval="4000" type="card" >
             <el-carousel-item v-for="item in dataImg" :key="item">

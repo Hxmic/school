@@ -14,7 +14,6 @@
     <el-table-column
       prop="sex"
       label="性别"
-      sortable
       width="150">
     </el-table-column>
 
@@ -32,11 +31,7 @@
       width="180">
     </el-table-column>
    
-    <el-table-column
-      prop="address"
-      label="地址"
-      :formatter="formatter">
-    </el-table-column>
+    
 
     <el-table-column label="操作">
       <template slot-scope="scope">
