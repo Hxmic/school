@@ -18,6 +18,7 @@ router.post('/login', function (req, res) {
         res.send({code: 0})
       }else {
         res.send({code: 1})
+        console.log(rows)
       }
     })
 })
@@ -72,19 +73,36 @@ router.post('/update_user', function(req, res) {
 
 })
 
-// router.get('/register',(req, res) => {
-//     let sql = $sql.user.register;
-//     let params = req.body;
+// 查询商品信息
+router.get('/sel_goods', function (req, res) {
     
-//     conn.query(sql, [params.username, params.userpsw], (err, result) => {
-//         if(err) {
-//             res.send(err);
-//         }
-//         if(result) {
-//             console.log(result)
-//         }
-//     })
-// })
+    let params = req.body;
+
+    conn.query('select * from goodssql', function (err, rows) {
+      console.log(rows)
+      if (err || rows.length == 0) {
+        console.log(err)
+        res.send({data: 0})
+      }else {
+        res.send({data: rows})
+        console.log(rows)
+      }
+    })
+})
+
+// 删除商品信息
+router.post('/del_goods',function(req,res) {
+    let params = req.body;
+    conn.query('delete from goodssql where gid="' + params.gid + '"', function(err, rows) {
+        if(err) {
+            console.log(err)
+            res.send({code: 0})
+        } else {
+            res.send({code: 1});
+        }
+    })
+})
+
 
 router.get('*', (req, res) => {
     res.send('404');
