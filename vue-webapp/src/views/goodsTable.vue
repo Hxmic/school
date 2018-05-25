@@ -1,8 +1,10 @@
 <template>
   
   <div>
-      <input type="text" autocomplete="off" class="el-input__inner" placeholder="查询商品">
-      <el-button type="primary" @click="getGoodsTable">查询</el-button>
+      <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="商品名" v-model="qname">
+      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="楼层（一楼）" v-model="qlocation">
+       -->
+      <el-button type="primary" @click="queryGoodsInfo">查询</el-button>
       <!-- <button></button> -->
     <el-table
         :data="tableData"
@@ -82,40 +84,25 @@
      >
      <div>
        <div class="el-form-item">
-         <label class="el-form-item__label" style="width: 80px;">商品名</label>
-         <div class="el-form-item__content" style="margin-left: 80px;">
-           <div class="el-input"><!---->
-              <input type="text" autocomplete="off" class="el-input__inner" v-model="this.goodsname">
-           </div><!---->
-          </div>
-        </div>
+          <label class="el-form-item__label" style="width: 80px;">商品名</label>
+          <input type="text" class="el-input__inner" v-model="goodsname">
+          <!-- <input type="text" v-model="goodsname"> -->
+       </div>
+       
+       <div class="el-form-item">
+          <label class="el-form-item__label" style="width: 80px;">商品描述</label>
+          <input type="text" class="el-input__inner" v-model="goodsdescribe">
+       </div>
+
+       <div class="el-form-item">
+          <label class="el-form-item__label" style="width: 80px;">商品价格</label>
+          <input type="text" class="el-input__inner" v-model="goodsprice">
+       </div>
 
         <div class="el-form-item">
-         <label class="el-form-item__label" style="width: 80px;">商品描述</label>
-         <div class="el-form-item__content" style="margin-left: 80px;">
-           <div class="el-input"><!---->
-              <input type="text" autocomplete="off" class="el-input__inner" v-model="this.goodsdescribe">
-           </div><!---->
-          </div>
-        </div>
-
-         <div class="el-form-item">
-         <label class="el-form-item__label" style="width: 80px;">商品价格</label>
-         <div class="el-form-item__content" style="margin-left: 80px;">
-           <div class="el-input"><!---->
-              <input type="text" autocomplete="off" class="el-input__inner" v-model="this.goodsprice">
-           </div><!---->
-          </div>
-        </div>
-
-        <div class="el-form-item">
-         <label class="el-form-item__label" style="width: 80px;">商品位置</label>
-         <div class="el-form-item__content" style="margin-left: 80px;">
-           <div class="el-input"><!---->
-              <input type="text" autocomplete="off" class="el-input__inner" v-model="this.goodslocation">
-           </div><!---->
-          </div>
-        </div>
+          <label class="el-form-item__label" style="width: 80px;">商品位置</label>
+          <input type="text" class="el-input__inner" v-model="goodslocation">
+       </div>
      </div>
 
       <span slot="footer" class="dialog-footer">
@@ -134,6 +121,10 @@
   export default {
     data() {
       return {
+        goodsname:'',
+        goodsdescribe:'',
+        goodsnlocation:'',
+        goodsprice:'',
         tableData: [{
           gid: '',
           gname: '毛巾',
@@ -149,10 +140,8 @@
          dialogVisible: false,
          listIndex: '',
          editObj:[{}],
-         goodsname:'',
-         goodsdescribe:'',
-         goodsnlocation:'',
-         goodsprice:'',
+         qname: '',
+         qlocation: '',
       }
     },
     mounted() {
@@ -170,8 +159,27 @@
         },{}).then(function(data) {
           let info = data.data.data;
           _this.tableData = info;
-          // console.log(_this.tableData)
+
         })
+      },
+      // 按条件查询商品
+      queryGoodsInfo() {
+        let _this = this;
+        let url = '/api/query_goods';
+        if(this.qname == '') {
+          this.$message.error('查询数据不能为空');
+        } else{
+            this.$http.post(url, {
+            name: this.qname,
+            // location: this.qlocation
+          },{}).then(function(data) {
+            console.log(data);
+            let info = data.data.data;
+            _this.tableData = info;
+          })
+        }
+       
+
       },
 
       // 管理员删除商品
@@ -190,7 +198,7 @@
           }
         })
       },
-      // 管理员修改商品
+      // 弹出修改商品的模态框
      handleEdit(index, row) {
       
        this.listIndex = row.gid;
@@ -205,7 +213,24 @@
      },
      // 确认修改商品
      editConfirm() {
+       let _this = this;
+       let url = 'api/upd_goods';
+       this.$http.post(url, {
+         name: _this.goodsname,
+         location: _this.goodslocation,
+         describe: _this.goodsdescribe,
+         price: _this.goodsprice,
+         gid: _this.listIndex
+       },{}).then(function(data) {
+         let mark = data.body.code;
+         if(mark == 1) {
+           this.$message.success('修改成功');
+           this.getGoodsTable();
 
+         } else {
+           this.$message.error('修改失败');
+         }
+       })
        this.dialogVisible = false;
      },
       // 格式化日期
@@ -221,7 +246,7 @@
 </script>
 
 <style lang="less">
-.el-input__inner {
+.el-put-name {
   width: 200px;
   margin-right: 15px;
 }

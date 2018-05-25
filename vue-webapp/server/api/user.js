@@ -102,7 +102,42 @@ router.post('/del_goods',function(req,res) {
         }
     })
 })
+// 修改商品信息
+router.post('/upd_goods',function(req, res) {
+    let params = req.body;
+    
+    conn.query('update goodssql set gname = "'+params.name + '" ,gdescribe = "' + params.describe + '",gprice = "' + params.price + '" ,glocation = "' + params.location + '"where gid = "' + params.gid + '"', function(err, result) {
+        !err ? res.send({code: 1}) : res.send({code: 0})
 
+    })
+})
+// 按条件查询商品
+router.post('/query_goods', function(req, res) {
+    let params = req.body;
+
+    conn.query('select * from goodssql where gname="' + params.name + '"', function (err, rows) {
+        if (err || rows.length == 0) {
+            console.log(err)
+            res.send({data: 0})
+        } else {
+            res.send({data: rows})
+            console.log(rows)
+        }
+    })
+})
+// 添加商品
+
+router.post('/add_goods', function(req,res) {
+    let params = req.body;
+    conn.query('insert into goodssql set ?', {gname: params.name,gdescribe:params.describe,gprice:params.price,gsale:params.sale,gdate:params.date,glocation:params.location}, function(err, rows) {
+        if(err) {
+            console.log(err);
+            res.send({code: 0, ms: '服务器出错'})
+        } else {
+            res.send({code: 1})
+        }
+    })
+})
 
 router.get('*', (req, res) => {
     res.send('404');
