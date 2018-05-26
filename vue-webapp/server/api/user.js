@@ -22,6 +22,34 @@ router.post('/login', function (req, res) {
       }
     })
 })
+// 查询用户
+
+router.get('/query_admin', function(req, res) {
+    let params = req.body;
+    conn.query('select * from adminsql', function (err, rows) {
+        console.log(rows)
+        if (err || rows.length == 0) {
+          console.log(err)
+          res.send({data: 0})
+        }else {
+          res.send({data: rows})
+          console.log(rows)
+        }
+      })
+})
+
+// 删除用户
+router.post('/del_admin',function(req,res) {
+    let params = req.body;
+    conn.query('delete from adminsql where aid="' + params.aid + '"', function(err, rows) {
+        if(err) {
+            console.log(err)
+            res.send({code: 0})
+        } else {
+            res.send({code: 1});
+        }
+    })
+})
 
 // 可以完成注册
 router.post('/register', function(req, res) {
@@ -115,7 +143,7 @@ router.post('/upd_goods',function(req, res) {
 router.post('/query_goods', function(req, res) {
     let params = req.body;
 
-    conn.query('select * from goodssql where gname="' + params.name + '"', function (err, rows) {
+    conn.query('select * from goodssql where gname like "%' + params.name + '%"', function (err, rows) {
         if (err || rows.length == 0) {
             console.log(err)
             res.send({data: 0})

@@ -9,7 +9,7 @@
 					<i class="el-icon-setting" ></i>
 					<el-dropdown-menu slot="dropdown">
 					<el-dropdown-item>个人中心</el-dropdown-item>
-					<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+					<el-dropdown-item divided @click.native="logout">返回登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 				<span class="userinfo">{{userName}}</span>
@@ -73,6 +73,7 @@
 </template>
 <script type="text/ecmascript-6">
     export default {
+		name: 'headName',
         data(){
             return {
 				userName: '用户',
@@ -92,11 +93,11 @@
 						},
 						{
 							name: '商品管理',
-							first: '商品',
-							second: '打折促销商品',
+							first: '添加商品',
+							second: '商品信息',
 							third: '商品主页',
 							route: '/main',
-							routeFirst: '/goods_table',
+							routeFirst: '/goods_add',
 							routeSecond: '/goods_table'
 							
 						},
@@ -128,6 +129,7 @@
 		created() {
 			this.getParams();
 		},
+		props: ['userName'],
         methods:{
 			// 获取参数
 			getParams() {

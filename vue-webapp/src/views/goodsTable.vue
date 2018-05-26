@@ -43,6 +43,7 @@
         prop="gdate"
         label="上架日期"
         :formatter="dateFormat"
+        sortable
         width="100">
         </el-table-column>
 
@@ -144,7 +145,7 @@
          editObj:[{}],
          qname: '',
          qlocation: '',
-         qdiscount: '',
+         qdiscount: 0,
       }
     },
     mounted() {
@@ -189,7 +190,7 @@
       queryDisGoodsInfo() {
          let _this = this;
         let url = '/api/query_disgoods';
-        if(this.qname == '' && this.qdiscount == '') {
+        if(this.qname == '' ) {
           this.$message.error('查询数据不能为空');
         } else{
             this.$http.post(url, {

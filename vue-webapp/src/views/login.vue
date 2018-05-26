@@ -11,9 +11,9 @@
     <div class="remember"></div>
 
     <el-form-item style="width:100%;">
-      <el-button type="success" style="float:left;width:40%"  @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
+      <el-button type="success" style="float:left;width:100%"  @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
-      <el-button  style="float:right;width:40%" @click="handleRegister">注册</el-button>
+      <!-- <el-button  style="float:right;width:40%" @click="handleRegister">注册</el-button> -->
     </el-form-item>
   </el-form>
 </template>
@@ -102,6 +102,9 @@ export default {
     }
     .remember {
       margin: 0px 0px 35px 0px;
+    }
+    .el-input__inner {
+      width: 100%;
     }
   }
 </style>

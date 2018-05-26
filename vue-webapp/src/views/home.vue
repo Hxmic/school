@@ -8,11 +8,10 @@
 				<el-dropdown class="userinfo">
 					<i class="el-icon-setting" ></i>
 					<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item>个人中心</el-dropdown-item>
 					<el-dropdown-item divided @click.native="logout">返回登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-				<span class="userinfo">{{userName}}</span>
+				<span class="userinfo" @click="goToPerson">{{userName}}</span>
 		</el-header>
 
 
@@ -89,7 +88,7 @@
                   name: '人员管理',
                   first: '个人信息',
                   second: '用户管理',
-                  routeFirst: '/person',
+                  routeFirst: '/',
                   routeSecond: '/user_table'
                 },
                 {
@@ -136,6 +135,15 @@
 			getParams() {
 				let name = this.$route.query.username;
 				this.userName = name;
+			},
+
+			goToPerson() {
+				this.$router.push({
+                    path: '/person',
+                    query: {
+                      username: this.userName
+                    }
+                  })
 			},
 			// 退出登录
 			logout() {
