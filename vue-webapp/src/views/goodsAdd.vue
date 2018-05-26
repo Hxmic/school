@@ -1,6 +1,9 @@
 <template>
-    <div>
+    <div class="add-input">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            
+            <!-- <div>{{orderInfo}}</div> -->
+            
             <el-form-item label="商品名" prop="name">
                 <el-input v-model="ruleForm.name"></el-input>
             </el-form-item>
@@ -98,6 +101,14 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
+
+      // 获取参数
+			getParams() {
+				let name = this.$route.query.username;
+				this.userName = name;
+			},
+
+      // 获取当前时间
       getCurrentTime() {
             let dateTime = new Date();
             let year = dateTime.getFullYear();
@@ -110,6 +121,14 @@
     },
     mounted() {
         this.getCurrentTime();
-    }
+    },
+    
   }
 </script>
+
+<style lang="less">
+.add-input {
+  width: 600px;
+  margin: 0 auto;
+}
+</style>

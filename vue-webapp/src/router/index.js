@@ -13,6 +13,8 @@ const Person = () => import(/* webpackChunkName: "out"*/ '@/views/person')
 const UserTable = () => import(/* webpackChunkName: "out"*/ '@/views/userTable')
 
 const GoodsTable = () => import(/* webpackChunkName: "out"*/ '@/views/goodsTable')
+const GoodsAdd = () => import(/* webpackChunkName: "out"*/ '@/views/goodsAdd')
+
 const MarketTable = () => import(/* webpackChunkName: "out"*/ '@/views/marketTable')
 
 const ActiveTable = () => import(/* webpackChunkName: "out"*/ '@/views/activeTable')
@@ -47,6 +49,9 @@ export default new Router({
       name: 'Home',
       component: Home,
       redirect: '/main', // 登录后直接映射到main
+      meta:{
+        requireLogin:true,
+      },
       children: [
         {
           path: '/main',
@@ -67,6 +72,11 @@ export default new Router({
           path: '/goods_table',
           component: GoodsTable,
           name: 'GoodsTable'
+        },
+        {
+          path: '/goods_add',
+          component: GoodsAdd,
+          name: 'GoodsAdd'
         },
         {
           path: '/market_table',

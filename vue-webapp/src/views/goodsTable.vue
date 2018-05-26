@@ -2,9 +2,10 @@
   
   <div>
       <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="商品名" v-model="qname">
-      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="楼层（一楼）" v-model="qlocation">
-       -->
-      <el-button type="primary" @click="queryGoodsInfo">查询</el-button>
+      <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣）" v-model="qdiscount">
+      
+      <el-button type="primary" @click="queryGoodsInfo">商品查询</el-button>
+      <el-button type="primary" @click="queryDisGoodsInfo">打折查询</el-button>
       <!-- <button></button> -->
     <el-table
         :data="tableData"
@@ -45,11 +46,11 @@
         width="100">
         </el-table-column>
 
-        <!-- <el-table-column
-        prop="discount"
+        <el-table-column
+        prop="gdiscount"
         label="打折"
         width="100">
-        </el-table-column> -->
+        </el-table-column>
 
         <el-table-column
         prop="glocation"
@@ -133,8 +134,9 @@
           gsale: 100,
           comment: '99%',
           gdate: '2016-05-01',
-          discount: 9,
+          gdiscount: 9,
           glocation: '三楼304',
+          gdiscount: '',
           gperson: '李四'
         }, ],
          dialogVisible: false,
@@ -142,6 +144,7 @@
          editObj:[{}],
          qname: '',
          qlocation: '',
+         qdiscount: '',
       }
     },
     mounted() {
@@ -175,13 +178,34 @@
           },{}).then(function(data) {
             console.log(data);
             let info = data.data.data;
+            console.log(info);
             _this.tableData = info;
           })
         }
        
 
       },
+      // 打折促销查询
+      queryDisGoodsInfo() {
+         let _this = this;
+        let url = '/api/query_disgoods';
+        if(this.qname == '' && this.qdiscount == '') {
+          this.$message.error('查询数据不能为空');
+        } else{
+            this.$http.post(url, {
+            name: this.qname,
+            discount: this.qdiscount
+            // location: this.qlocation
+          },{}).then(function(data) {
+            console.log(data);
+            let info = data.data.data;
+            console.log(info + 'info');
+            _this.tableData = info;
+          })
+        }
+       
 
+      },
       // 管理员删除商品
       handleDelete(index, row) {
         let url = '/api/del_goods'
