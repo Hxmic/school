@@ -9,10 +9,8 @@ conn.connect();
 
 // 可以完成登录
 router.post('/login', function (req, res) {
-    
     let params = req.body;
-
-    conn.query('select username from usersql where username="' + params.username + '" and password="' + params.password+'"', function (err, rows) {
+    conn.query('select aname from adminsql where aname="' + params.username + '" and apwd="' + params.password+'"', function (err, rows) {
       if (err || rows.length == 0) {
         console.log(err)
         res.send({code: 0})
@@ -22,8 +20,29 @@ router.post('/login', function (req, res) {
       }
     })
 })
-// 查询用户
+// 通过用户名查找用户 
+router.post('/query_uname', function(req, res) {
+    let params = req.body;
+    conn.query('select * from adminsql where aname = "' +params.aname +'"', function(err, result) {
+        if (err ) {
+            res.send({data: 0})
+        }else {
+            res.json(result)
+            console.log(result)
+          }
+    })
+})
 
+// 修改个人信息
+router.post('/upd_admin',function(req, res) {
+    let params = req.body;
+    
+    conn.query('update adminsql set aname = "'+params.name + '" ,apwd = "' + params.pwd + '",asex = "' + params.sex + '" ,aemail = "' + params.email + '" ,abirth = "' + params.birth +'"where aid = "' + params.aid + '"', function(err, result) {
+        !err ? res.send({code: 1}) : res.send({code: 0})
+
+    })
+})
+// 查询用户
 router.get('/query_admin', function(req, res) {
     let params = req.body;
     conn.query('select * from adminsql', function (err, rows) {
@@ -142,7 +161,6 @@ router.post('/upd_goods',function(req, res) {
 // 按条件查询商品
 router.post('/query_goods', function(req, res) {
     let params = req.body;
-
     conn.query('select * from goodssql where gname like "%' + params.name + '%"', function (err, rows) {
         if (err || rows.length == 0) {
             console.log(err)
@@ -178,6 +196,18 @@ router.post('/add_goods', function(req,res) {
             res.send({code: 0, ms: '服务器出错'})
         } else {
             res.send({code: 1})
+        }
+    })
+})
+// 查重推广活动
+router.post('/query_market', function(req,res) {
+    let params = req.body;
+    conn.query('select * from merchant where gvideo="' + params.video + '"', function (err, result) {
+        if(err) {
+            console.log(err);
+            res.send({code: 0, ms: '服务器出错'})
+        } else {
+            res.json(result)
         }
     })
 })

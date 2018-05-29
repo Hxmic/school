@@ -46,7 +46,6 @@ export default {
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            
             var url = '/api/login';
             this.$http.post(url, {
               username: loginParams.username,

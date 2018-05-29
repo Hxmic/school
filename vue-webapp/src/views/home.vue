@@ -62,7 +62,7 @@
 					</el-col>
 					<el-col :span="24" class="content-wrapper">
 						<transition name="fade" mode="out-in">
-              <router-view ></router-view>
+              			<router-view ></router-view>
 							<!-- <router-view :id="id" :order-info="orderInfo"></router-view> -->
 						</transition>
 					</el-col>
