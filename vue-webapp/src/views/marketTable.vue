@@ -50,9 +50,9 @@
         tableData: [{
           name: '万达',
           introduce: '万达是一个独立的大商场',
-          phone: 13112341234,
+          
           important: '主要包含各种娱乐设施，以及电影院',
-          address: '吉林省吉林市龙潭区'
+          address: '吉林省吉林市龙潭区',phone: 13112341234,
          
         }, {
           name: '一百货',
@@ -74,6 +74,9 @@
           address: '上海市普陀区金沙江路 1517 弄'
         }]
       }
+    },
+    created() {
+      this.getName();
     },
     methods: {
       formatter(row, column) {
@@ -105,7 +108,11 @@
             return false;
           }
         });
-      }
+      },
+       getName() {
+           let name = this.$route.query.nameTra;
+			console.log(name);
+       }
     }
   }
 </script>

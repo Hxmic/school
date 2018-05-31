@@ -33,12 +33,13 @@
 								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
 								<el-menu-item-group>
 									
-									<router-link :to="`${item.routeFirst}`">
+									<!-- <router-link :to="`${item.routeFirst}`"> -->
+									<router-link :to="{ path: `${item.routeFirst}`, query:{ nameTra : userName }}">
 										<el-menu-item index="1-1">
 												{{item.first}}
 										</el-menu-item>
 									</router-link>
-									<router-link :to="`${item.routeSecond}`">
+									<router-link :to="{ path: `${item.routeSecond}`, query:{ nameTra : userName }}">
 										<el-menu-item index="1-2">
 												{{item.second}}
 										</el-menu-item>
@@ -119,7 +120,7 @@
                   name: '商场管理',
                   first: '商场主页',
                   second: '商场',
-                  routeFirst: '/person',
+                  routeFirst: '/market_home',
                   routeSecond: '/market_table'
                 },
               ]

@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import {timeFor} from '../util/util'
+
   export default {
     data() {
       return {
@@ -95,10 +97,11 @@
 
       dateFormat(row, column) {
         let date = row[column.property];
-        let d = new Date(date);
-        let time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' 
-        + d.getDate();
-        return time;
+        return timeFor(date);
+        // let d = new Date(date);
+        // let time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' 
+        // + d.getDate();
+        // return time;
       } 
     }
   }

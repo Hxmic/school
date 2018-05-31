@@ -120,12 +120,15 @@
 
 
 <script>
+import {timeFor} from '../util/util'
+
   export default {
+
     data() {
       return {
         goodsname:'',
         goodsdescribe:'',
-        goodsnlocation:'',
+        goodslocation:'',
         goodsprice:'',
         tableData: [{
           gid: '',
@@ -261,10 +264,11 @@
       // 格式化日期
       dateFormat(row, column) {
         let date = row[column.property];
-        let d = new Date(date);
-        let time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' 
-        + d.getDate();
-        return time;
+        return timeFor(date);
+        // let d = new Date(date);
+        // let time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' 
+        // + d.getDate();
+        // return time;
       }  
     }
   }

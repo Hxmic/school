@@ -16,6 +16,7 @@ const GoodsTable = () => import(/* webpackChunkName: "out"*/ '@/views/goodsTable
 const GoodsAdd = () => import(/* webpackChunkName: "out"*/ '@/views/goodsAdd')
 
 const MarketTable = () => import(/* webpackChunkName: "out"*/ '@/views/marketTable')
+const MarketHome = () => import(/* webpackChunkName: "out"*/ '@/views/marketHome')
 
 const ActiveTable = () => import(/* webpackChunkName: "out"*/ '@/views/activeTable')
 
@@ -82,6 +83,12 @@ export default new Router({
           path: '/market_table',
           component: MarketTable,
           name: 'MarketTable'
+
+        },
+        {
+          path: '/market_home',
+          component: MarketHome,
+          name: 'MarketHome'
 
         },
         {
