@@ -187,7 +187,6 @@ router.post('/query_disgoods', function(req, res) {
 })
 
 // 添加商品
-
 router.post('/add_goods', function(req,res) {
     let params = req.body;
     conn.query('insert into goodssql set ?', {gname: params.name,gdescribe:params.describe,gprice:params.price,gsale:params.sale,gdate:params.date,glocation:params.location,gperson:params.location}, function(err, rows) {
@@ -199,6 +198,40 @@ router.post('/add_goods', function(req,res) {
         }
     })
 })
+
+// 查询商场
+router.get('/query_market', function(req, res) {
+    let params = req.body;
+
+    conn.query('select * from marketsql', function(err, rows) {
+
+        if (err || rows.length == 0) {
+            console.log(err)
+            res.send({data: 0})
+          }else {
+            res.send({data: rows})
+            // console.log(rows)
+          }
+    })
+})
+
+
+// 按楼层查询商品
+router.post('/query_floor', function(req, res) {
+    let params = req.body;
+    conn.query('select * from goodssql where glocation like "%' + params.location + '%"', function (err, rows) {
+        if (err || rows.length == 0) {
+            console.log(err)
+            res.send({data: 0})
+        } else {
+            res.send({data: rows})
+            console.log(rows)
+        }
+    })
+})
+
+
+
 // 查重推广活动
 router.post('/query_market', function(req,res) {
     let params = req.body;
