@@ -1,37 +1,29 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="新品推广" name="first">
-      
+    <el-tab-pane label="商场平面图" name="main">
+      商场平面图
+    </el-tab-pane>
+
+    <el-tab-pane label="活动推广模块" name="first">
+       <VIDEO></VIDEO> 
     </el-tab-pane>
     <el-tab-pane label="打折促销商品" name="second">
         <el-carousel :interval="4000" type="card" >
-            <el-carousel-item v-for="item in dataImg" :key="item">
-                <img src="../assets/goodsimg/second.jpg" alt="">
-                <img src="../assets/goodsimg/first.jpg" alt="">
-                <img src="../assets/goodsimg/three.jpg" alt="">
-            </el-carousel-item>
+           
         </el-carousel>
     </el-tab-pane>
   </el-tabs>
 </template>
 <script>
+import VIDEO from '@/components/video'
 
 
   export default {
+    components: { VIDEO },
     data() {
       return {
-        activeName: 'second',
-        dataImg: [
-            {
-                url: '/static/img/first.jpg'
-            },
-            {
-                url: '/static/img/second.jpg'
-            },
-            {
-                url: '../assets/goodsimg/first.jpg'
-            }
-        ]
+        activeName: 'main',
+       
       };
     },
     methods: {

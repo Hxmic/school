@@ -245,10 +245,28 @@ router.post('/query_locg', function(req, res) {
     })
 })
 
-// 查重推广活动
-router.post('/query_market', function(req,res) {
+// 查询商品信息
+router.get('/query_allactive', function (req, res) {
+    
     let params = req.body;
-    conn.query('select * from merchant where gvideo="' + params.video + '"', function (err, result) {
+
+    conn.query('select * from merchantsql', function (err, rows) {
+      console.log(rows)
+      if (err || rows.length == 0) {
+        console.log(err)
+        res.send({data: 0})
+      }else {
+        res.send({data: rows})
+        console.log(rows)
+      }
+    })
+})
+
+
+// 查看推广活动
+router.post('/query_avtive', function(req,res) {
+    let params = req.body;
+    conn.query('select * from merchantsql where cname = "' + params.cname + '"', function (err, result) {
         if(err) {
             console.log(err);
             res.send({code: 0, ms: '服务器出错'})
