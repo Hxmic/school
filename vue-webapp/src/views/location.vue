@@ -2,10 +2,10 @@
   
   <div>
       <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="商品名" v-model="qname">
-      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣）" v-model="qdiscount">
-       -->
+      <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣" v-model="qdiscount">
+      
       <el-button type="primary" @click="queryGoodsInfo">商品查询</el-button>
-      <!-- <el-button type="primary" @click="queryDisGoodsInfo">打折查询</el-button> -->
+      <el-button type="primary" @click="queryDisGoodsInfo">打折查询</el-button>
       <!-- <button></button> -->
     <el-table
         :data="tableData"
@@ -16,7 +16,7 @@
         prop="gname"
         label="商品名"
         sortable
-        width="100">
+        width="150">
         </el-table-column>
 
         <el-table-column
@@ -44,7 +44,7 @@
         label="上架日期"
         :formatter="dateFormat"
         sortable
-        width="100">
+        width="150">
         </el-table-column>
 
         <el-table-column
@@ -56,26 +56,16 @@
         <el-table-column
         prop="glocation"
         label="商品位置"
-        width="100">
+        width="150">
         </el-table-column>
 
         <el-table-column
         prop="gperson"
         label="发布人员"
-        width="100">
+        width="150">
         </el-table-column>
 
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button
-              size="mini" 
-              type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
+       
     </el-table>
 
 
@@ -87,23 +77,23 @@
      <div>
        <div class="el-form-item">
           <label class="el-form-item__label" style="width: 80px;">商品名</label>
-          <input type="text" class="el-input__inner w-input" v-model="goodsname">
+          <input type="text" class="el-input__inner" v-model="goodsname">
           <!-- <input type="text" v-model="goodsname"> -->
        </div>
        
        <div class="el-form-item">
           <label class="el-form-item__label" style="width: 80px;">商品描述</label>
-          <input type="text" class="el-input__inner w-input" v-model="goodsdescribe">
+          <input type="text" class="el-input__inner" v-model="goodsdescribe">
        </div>
 
        <div class="el-form-item">
           <label class="el-form-item__label" style="width: 80px;">商品价格</label>
-          <input type="text" class="el-input__inner w-input" v-model="goodsprice">
+          <input type="text" class="el-input__inner" v-model="goodsprice">
        </div>
 
         <div class="el-form-item">
           <label class="el-form-item__label" style="width: 80px;">商品位置</label>
-          <input type="text" class="el-input__inner w-input" v-model="goodslocation">
+          <input type="text" class="el-input__inner" v-model="goodslocation">
        </div>
      </div>
 
@@ -148,7 +138,7 @@ import {timeFor} from '../util/util'
          editObj:[{}],
          qname: '',
          qlocation: '',
-         qdiscount: 0,
+         qdiscount: '',
       }
     },
     mounted() {
@@ -237,7 +227,6 @@ import {timeFor} from '../util/util'
        this.goodsdescribe = row.gdescribe;
        this.goodsprice = row.gprice;
        
-       
        this.dialogVisible = true;
      },
      // 确认修改商品
@@ -283,9 +272,5 @@ import {timeFor} from '../util/util'
 .upd-p {
   padding-bottom: 10px;
   
-}
-
-.w-input {
-  width: 200px;
 }
 </style>

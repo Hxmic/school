@@ -175,7 +175,7 @@ router.post('/query_goods', function(req, res) {
 router.post('/query_disgoods', function(req, res) {
     let params = req.body;
 
-    conn.query('select * from goodssql where gname="' + params.name + '" and gdiscount > "' + params.discount + '"', function (err, rows) {
+    conn.query('select * from goodssql where gname like "%' + params.name + '%" and gdiscount >= "' + params.discount + '"', function (err, rows) {
         if (err || rows.length == 0) {
             console.log(err)
             res.send({data: 0})
@@ -231,6 +231,19 @@ router.post('/query_floor', function(req, res) {
 })
 
 
+// 按条件查询商品
+router.post('/query_locg', function(req, res) {
+    let params = req.body;
+    conn.query('select * from goodssql where gname like "%' + params.name + '%" and glocation like "' + params.location + '"', function (err, rows) {
+        if (err || rows.length == 0) {
+            console.log(err)
+            res.send({data: 0})
+        } else {
+            res.send({data: rows})
+            console.log(rows)
+        }
+    })
+})
 
 // 查重推广活动
 router.post('/query_market', function(req,res) {

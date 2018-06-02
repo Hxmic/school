@@ -2,7 +2,7 @@
   <div class="first">
     <div class="f-left box-f" v-for="(item,index) in tableData" :key="index">
       <div>
-        <p @click="queryFloor">{{item.gname}}</p>
+        <p >{{item.gname}}</p>
         <img :src="`${item.gimg}`" alt="">
         <span>位置：{{item.glocation}}</span> <br>
         <span>售价：{{item.gprice}}元</span>

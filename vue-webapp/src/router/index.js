@@ -18,6 +18,11 @@ const GoodsAdd = () => import(/* webpackChunkName: "out"*/ '@/views/goodsAdd')
 const MarketTable = () => import(/* webpackChunkName: "out"*/ '@/views/marketTable')
 const MarketHome = () => import(/* webpackChunkName: "out"*/ '@/views/marketHome')
 
+
+const Location = () => import(/* webpackChunkName: "out"*/ '@/views/location')
+const Floor = () => import(/* webpackChunkName: "out"*/ '@/views/floor')
+
+
 const ActiveTable = () => import(/* webpackChunkName: "out"*/ '@/views/activeTable')
 
 // const Table = () => import(/* webpackChunkName: "out"*/ '@/views/table')
@@ -101,6 +106,16 @@ export default new Router({
           path: '/table',
           component: Table,
           name: 'Table'
+        },
+        {
+          path: '/location',
+          component: Location,
+          name: 'Location'
+        },
+        {
+          path: '/floor',
+          component: Floor,
+          name: 'Floor'
         }
       ]
     }

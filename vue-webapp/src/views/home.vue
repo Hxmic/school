@@ -27,7 +27,6 @@
 											<i class="el-icon-message"></i>{{item.name}}
 									</el-menu-item>
 								</router-link>
-
 							</div>
 							<el-submenu index="1" v-else>
 								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
@@ -106,16 +105,16 @@
                   name: '商品销售位置查询',
                   first: '楼层查询',
                   second: '商品位置查询',
-                  routeFirst: '/person',
-                  routeSecond: '/goods_table'
+                  routeFirst: '/floor',
+                  routeSecond: '/location'
                 },
-                {
-                  name: '商场活动推介管理',
-                  first: '最新推广',
-                  second: '活动',
-                  routeFirst: '/person',
-                  routeSecond: '/active_table'
-                },
+                // {
+                //   name: '商场活动推介管理',
+                //   first: '最新推广',
+                //   second: '活动',
+                //   routeFirst: '/active_table',
+                //   routeSecond: '/active_table'
+                // },
                 {
                   name: '商场管理',
                   first: '商场主页',
