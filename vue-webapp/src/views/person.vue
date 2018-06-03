@@ -1,5 +1,5 @@
 <template>
-    <div class="add-input">
+    <div class="add-input" v-show="flag">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             
             <!-- <div>{{orderInfo}}</div> -->
@@ -72,21 +72,45 @@
         sexSelect: 1,
         indexId: '',
         sexInput: '',
+        flag: true,
       };
     },
     mounted() {
-      this.getParams();
-      this.getUserInfo();
+      this.getName();
+      // this.getParams();
+      
     },
     methods: {
       formatter(row, column) {
         return row.address;
       },
-      getParams() {
-				let name = this.$route.query.username;
-        this.userName = name;
-        // console.log(name)
-      },
+      // getParams() {
+			// 	let name = this.$route.query.username;
+      //   this.userName = name;
+      //    if(name == ' ' || name == undefined || name == '用户') {
+      //         this.$message.error('返回登录查看个人信息!')
+      //         this.flag = false;
+      //       }
+      //       else {
+      //           this.getUserInfo();
+      //           this.flag = true;
+			//           console.log(name);
+      //       }
+      // },
+       getName() {
+           let name = this.$route.query.nameTra;
+           this.userName = name;
+           console.log(name);
+            if(name == ' ' || name == undefined || name == '用户' ) {
+              this.$message.error('返回登录查看个人信息!')
+              this.flag = false;
+            }
+            else {
+                this.flag = true;
+                this.getUserInfo();
+            }
+           
+       },
       getUserInfo() {
         let url = '/api/query_uname';
         let _this = this;

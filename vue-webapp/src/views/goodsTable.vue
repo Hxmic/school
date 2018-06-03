@@ -1,6 +1,6 @@
 <template>
   
-  <div>
+  <div v-show="flag">
       <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="商品名" v-model="qname">
       <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣）" v-model="qdiscount">
        -->
@@ -130,6 +130,7 @@ import {timeFor} from '../util/util'
         goodsdescribe:'',
         goodslocation:'',
         goodsprice:'',
+        flag: true,
         tableData: [{
           gid: '',
           gname: '毛巾',
@@ -153,6 +154,7 @@ import {timeFor} from '../util/util'
     },
     mounted() {
       this.getGoodsTable();
+      this.getName();
     },
     methods: {
       formatter(row, column) {
@@ -262,6 +264,21 @@ import {timeFor} from '../util/util'
        })
        this.dialogVisible = false;
      },
+
+       getName() {
+           let name = this.$route.query.nameTra;
+          //  this.userName = name;
+           console.log(name);
+            if(name == ' ' || name == undefined || name == '用户' ) {
+              this.$message.error('没有操作权限!')
+              this.flag = false;
+            }
+            else {
+                this.flag = true;
+            }
+       },
+
+
       // 格式化日期
       dateFormat(row, column) {
         let date = row[column.property];

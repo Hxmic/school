@@ -8,7 +8,7 @@
             </div>
             
             <el-carousel indicator-position="outside" class="img-h">
-                <el-carousel-item v-for="item in dataImg" :key="item" class="img-h">
+                <el-carousel-item v-for="(item, index) in dataImg" :key="index" class="img-h">
                     <img :src="`${item.imgUrl}`" alt="">
                 </el-carousel-item>
             </el-carousel>
@@ -44,22 +44,18 @@ import secondComponent from '@/components/marketIntroduce/second'
 import thirdComponent from '@/components/marketIntroduce/three'
 import fourComponent from '@/components/marketIntroduce/four'
 
-// 图片引入使用
-import defaultPic1 from '@/assets/goodsimg/1.jpg'
-import defaultPic2 from '@/assets/goodsimg/2.jpg'
-import defaultPic3 from '@/assets/goodsimg/3.jpg'
 
 export default {
     data() {
         return{
             dataImg: [{
-                    imgUrl: defaultPic1
+                    imgUrl: 'http://localhost/1.jpg'
                 },
                 {
-                    imgUrl: defaultPic2
+                    imgUrl: 'http://localhost/2.jpg'
                 },
                 {
-                    imgUrl: defaultPic3
+                    imgUrl: 'http://localhost/3.jpg'
                 },
             ],
             activeName: 'home',
@@ -84,16 +80,16 @@ export default {
 
            this.nameM = mName;
 
-            console.log(name)
-            console.log(mName)
-            console.log(mIntroduce)
-            console.log(mImportant)
-            console.log(mLocation)
-            console.log(mPhone)
+            // console.log(name)
+            // console.log(mName)
+            // console.log(mIntroduce)
+            // console.log(mImportant)
+            // console.log(mLocation)
+            // console.log(mPhone)
 
         },
         handleClick(tab, event) {
-            // console.log(tab, event);
+            console.log(tab, event);
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="add-input">
+    <div class="add-input" v-show="flag">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             
             <!-- <div>{{orderInfo}}</div> -->
@@ -66,8 +66,12 @@
           location: [
             { required: true, message: '请输入商品位置', trigger: 'change' }
           ],
-        }
+        },
+        flag: true,
       };
+    },
+    created() {
+      this.getName();
     },
     methods: {
       submitForm(formName) {
@@ -101,6 +105,20 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
+
+       getName() {
+           let name = this.$route.query.nameTra;
+          //  this.userName = name;
+           console.log(name);
+            if(name == ' ' || name == undefined || name == '用户' ) {
+              this.$message.error('没有操作权限!')
+              this.flag = false;
+            }
+            else {
+                this.flag = true;
+            }
+           
+       },
 
       // 获取参数
 			getParams() {

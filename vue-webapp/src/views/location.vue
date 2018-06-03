@@ -19,11 +19,11 @@
         width="150">
         </el-table-column>
 
-        <el-table-column
+        <!-- <el-table-column
         prop="gdescribe"
         label="商品描述"
         width="150">
-        </el-table-column>
+        </el-table-column> -->
 
         <el-table-column
         prop="gprice"
@@ -32,11 +32,11 @@
         </el-table-column>
 
 
-        <el-table-column
+        <!-- <el-table-column
         prop="gsale"
         label="销量"
         width="100">
-        </el-table-column>
+        </el-table-column> -->
 
     
         <el-table-column
@@ -59,11 +59,11 @@
         width="150">
         </el-table-column>
 
-        <el-table-column
+        <!-- <el-table-column
         prop="gperson"
         label="发布人员"
         width="150">
-        </el-table-column>
+        </el-table-column> -->
 
        
     </el-table>

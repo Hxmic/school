@@ -1,5 +1,6 @@
 <template>
-  <el-table
+<div v-show="flag">
+<el-table
     :data="tableData"
     style="width: 100%"
     :default-sort = "{prop: 'date', order: 'descending'}"
@@ -44,6 +45,8 @@
       </template>
     </el-table-column>
   </el-table>
+</div>
+  
 </template>
 
 <script>
@@ -57,16 +60,34 @@ import {timeFor} from '../util/util'
           asex: '男',
           aemail: '844863123@qq.com',
           abirth: '2016-05-02',
-        }]
+        }],
+        userName: '',
+        flag: true,
       }
     },
     mounted() {
+      this.getName();
       this.queryUser();
     },
     methods: {
       formatter(row, column) {
         return row.address;
       },
+
+      getName() {
+           let name = this.$route.query.nameTra;
+           this.userName = name;
+            if(name == ' ' || name == undefined || name == '用户') {
+              this.$message.error('没有操作权限!')
+              this.flag = false;
+            }
+            else {
+                this.queryUser();
+                this.flag = true;
+			          console.log(name);
+            }
+           
+       },
 
       queryUser() {
         let url = '/api/query_admin';

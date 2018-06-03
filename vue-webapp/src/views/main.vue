@@ -7,11 +7,6 @@
     <el-tab-pane label="活动推广模块" name="first">
        <VIDEO></VIDEO> 
     </el-tab-pane>
-    <el-tab-pane label="打折促销商品" name="second">
-        <el-carousel :interval="4000" type="card" >
-           
-        </el-carousel>
-    </el-tab-pane>
   </el-tabs>
 </template>
 <script>

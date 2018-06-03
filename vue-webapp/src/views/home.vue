@@ -8,10 +8,10 @@
 				<el-dropdown class="userinfo">
 					<i class="el-icon-setting" ></i>
 					<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item divided @click.native="logout">返回登录</el-dropdown-item>
+					<el-dropdown-item divided @click.native="logout">{{loginId}}</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
-				<span class="userinfo" @click="goToPerson">{{userName}}</span>
+				<span class="userinfo" >{{userName}}</span>
 		</el-header>
 
 
@@ -78,6 +78,7 @@
             return {
             userName: '用户',
             collapsed: false,
+			loginId: '返回登录',
             dataNav:{
               data:[
                 {
@@ -88,13 +89,13 @@
                   name: '人员管理',
                   first: '个人信息',
                   second: '用户管理',
-                  routeFirst: '/',
+                  routeFirst: '/person',
                   routeSecond: '/user_table'
                 },
                 {
                   name: '商品管理',
                   first: '添加商品',
-                  second: '商品信息',
+                  second: '管理商品',
                   third: '商品主页',
                   route: '/main',
                   routeFirst: '/goods_add',
@@ -135,16 +136,13 @@
 			getParams() {
 				let name = this.$route.query.username;
 				this.userName = name;
+				if(name == ' ' || name == 'undefined' || name == '用户') {
+					this.loginId = '返回登录'
+				} else {
+					this.loginId = '退出登录'
+				}
 			},
 
-			goToPerson() {
-				this.$router.push({
-                    path: '/person',
-                    query: {
-                      username: this.userName
-                    }
-                  })
-			},
 			// 退出登录
 			logout() {
 				var _this = this;
