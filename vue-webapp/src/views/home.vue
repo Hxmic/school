@@ -84,6 +84,13 @@
                 {
                   name: '主页',
                   route: '/main'
+				},
+				{
+                  name: '商品销售位置查询',
+                  first: '楼层查询',
+                  second: '商品位置查询',
+                  routeFirst: '/floor',
+                  routeSecond: '/location'
                 },
                 {
                   name: '人员管理',
@@ -102,13 +109,7 @@
                   routeSecond: '/goods_table'
                   
                 },
-                {
-                  name: '商品销售位置查询',
-                  first: '楼层查询',
-                  second: '商品位置查询',
-                  routeFirst: '/floor',
-                  routeSecond: '/location'
-                },
+                
                 // {
                 //   name: '商场活动推介管理',
                 //   first: '最新推广',

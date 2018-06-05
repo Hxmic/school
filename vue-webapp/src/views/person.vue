@@ -153,7 +153,7 @@
             },{}).then(function(data) {
               let mark = data.body.code;
                 if(mark == 1) {
-                  this.$message.success('修改成功,请退出重新登录');
+                  this.$message.success('修改成功');
                 } else {
                   this.$message.error('修改失败');
                 }

@@ -89,6 +89,29 @@ router.post('/register', function(req, res) {
         }
     })
 })
+
+
+// 可以完成添加用户
+router.post('/add_user', function(req, res) {
+    let params = req.body;
+    conn.query('select aname from adminsql where aname="' + params.username + '"', function(err, rows) {
+        if(err || rows.length == 0) {
+            console.log(err);
+            conn.query('insert into adminsql set ?', {aname: params.username,asex:params.sex, abirth:params.birth,}, function(err, rows) {
+                if(err) {
+                    console.log(err);
+                    res.send({code: 0, ms: '服务器出错'})
+                } else {
+                    res.send({code: 1})
+                }
+            })
+        } else {
+            res.send({code: 0, ms: '账户已存在'})
+        }
+    })
+})
+
+
 // 可以完成删除
 router.post('/delete_user', function(req, res) {
     let params = req.body;
@@ -272,6 +295,49 @@ router.post('/query_avtive', function(req,res) {
             res.send({code: 0, ms: '服务器出错'})
         } else {
             res.json(result)
+        }
+    })
+})
+
+// 查询商家 
+router.get('/sel_merchant', function (req, res) {
+    
+    let params = req.body;
+
+    conn.query('select * from merchantsql', function (err, rows) {
+      console.log(rows)
+      if (err || rows.length == 0) {
+        console.log(err)
+        res.send({data: 0})
+      }else {
+        res.send({data: rows})
+        console.log(rows)
+      }
+    })
+})
+
+// 删除商家信息
+router.post('/del_merchant',function(req,res) {
+    let params = req.body;
+    conn.query('delete from merchantsql where cid="' + params.cid + '"', function(err, rows) {
+        if(err) {
+            console.log(err)
+            res.send({code: 0})
+        } else {
+            res.send({code: 1});
+        }
+    })
+})
+
+// 添加商家
+router.post('/add_merchant', function(req,res) {
+    let params = req.body;
+    conn.query('insert into merchantsql set ?', {cname: params.name, clocation:params.location, cimportant:params.important, cactive:params.active, cvideo:params.video, cactive1:params.active1}, function(err, rows) {
+        if(err) {
+            console.log(err);
+            res.send({code: 0, ms: '服务器出错'})
+        } else {
+            res.send({code: 1})
         }
     })
 })

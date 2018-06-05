@@ -15,6 +15,11 @@
         </div>
 
     </el-tab-pane>
+
+    <el-tab-pane label="入驻商家" name="merchant">
+        <mComponent></mComponent>
+    </el-tab-pane>
+    
     <el-tab-pane label="一楼介绍" name="first">
         
         <p class="p-title">一楼主营食用商品</p>
@@ -43,7 +48,7 @@ import firstComponent from '@/components/marketIntroduce/first'
 import secondComponent from '@/components/marketIntroduce/second'
 import thirdComponent from '@/components/marketIntroduce/three'
 import fourComponent from '@/components/marketIntroduce/four'
-
+import mComponent from '@/components/marketIntroduce/merchant'
 
 export default {
     data() {
@@ -60,14 +65,13 @@ export default {
             ],
             activeName: 'home',
             nameM: '',
-
         }
     },
 
     created() {
         this.getName()
     },
-    components: { homeComponent, firstComponent, secondComponent, thirdComponent, fourComponent},
+    components: { homeComponent, firstComponent, secondComponent, thirdComponent, fourComponent, mComponent},
     methods: {
        getName() {
            let name = this.$route.query.nameTra;
@@ -88,6 +92,7 @@ export default {
             // console.log(mPhone)
 
         },
+
         handleClick(tab, event) {
             console.log(tab, event);
         }

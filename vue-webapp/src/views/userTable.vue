@@ -1,51 +1,60 @@
 <template>
 <div v-show="flag">
-<el-table
-    :data="tableData"
-    style="width: 100%"
-    :default-sort = "{prop: 'date', order: 'descending'}"
-    >
-     <el-table-column
-      prop="aname"
-      label="用户名"
-      sortable
-      width="150">
-    </el-table-column>
+  <div v-show="mark">
 
-    <el-table-column
-      prop="asex"
-      label="性别"
-      width="150">
-    </el-table-column>
+    <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="用户名" v-model="uname">
+      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣）" v-model="qdiscount">
+       -->
+      <el-button type="primary" @click="addAdmin">添加管理员</el-button>
 
-    <el-table-column
-      prop="aemail"
-      label="邮箱"
-      width="180">
-    </el-table-column>
+  </div>
+
+  <el-table
+      :data="tableData"
+      style="width: 100%"
+      :default-sort = "{prop: 'date', order: 'descending'}"
+      >
+      <el-table-column
+        prop="aname"
+        label="用户名"
+        sortable
+        width="150">
+      </el-table-column>
+
+      <el-table-column
+        prop="asex"
+        label="性别"
+        width="150">
+      </el-table-column>
+
+      <el-table-column
+        prop="aemail"
+        label="邮箱"
+        width="180">
+      </el-table-column>
 
 
-    <el-table-column
-      prop="abirth"
-      label="生日"
-      :formatter="dateFormat"
-      sortable
-      width="180">
-    </el-table-column>
-  
-    <el-table-column label="操作">
-      <template slot-scope="scope">
-        <!-- <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
-</div>
+      <el-table-column
+        prop="abirth"
+        label="生日"
+        :formatter="dateFormat"
+        sortable
+        width="180">
+      </el-table-column>
+    
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <!-- <el-button
+            size="mini"
+            @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
   
 </template>
 
@@ -63,6 +72,10 @@ import {timeFor} from '../util/util'
         }],
         userName: '',
         flag: true,
+        mark: false,
+        sex: '男',
+        uname: '',
+        birth: '2018-06-07',
       }
     },
     mounted() {
@@ -80,10 +93,16 @@ import {timeFor} from '../util/util'
             if(name == ' ' || name == undefined || name == '用户') {
               this.$message.error('没有操作权限!')
               this.flag = false;
+            } else if(name == 'admin') {
+                this.queryUser();
+                this.mark = true;
+                this.flag = true;
+			          console.log(name);
             }
             else {
                 this.queryUser();
                 this.flag = true;
+                this.mark = false;
 			          console.log(name);
             }
            
@@ -97,6 +116,28 @@ import {timeFor} from '../util/util'
           let info = data.data.data;
           _this.tableData = info;
         })
+      },
+
+      addAdmin() {
+        let _this = this;
+        console.log(this.uname)
+        var url = '/api/add_user';
+            this.$http.post(url, {
+                  username: _this.uname,
+                  sex: _this.sex,
+                  birth: _this.birth
+                },{}).then(function(data) {
+                  console.log(data.body.code);
+                  if(data.body.code == 0) {
+                    this.$message.error('用户已存在');
+                  } else {
+                    this.$message({
+                      message: '添加成功',
+                      type: 'success'
+                    });
+                    _this.queryUser();
+                  }
+                })
       },
 
       handleDelete(index, row) {

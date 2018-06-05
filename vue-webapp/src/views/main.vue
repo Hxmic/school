@@ -4,8 +4,12 @@
       商场平面图
     </el-tab-pane>
 
-    <el-tab-pane label="活动推广模块" name="first">
+    <el-tab-pane label="活动推广" name="first">
        <VIDEO></VIDEO> 
+    </el-tab-pane>
+
+    <el-tab-pane label="打折促销" name="second">
+       <DISCOUNT></DISCOUNT>
     </el-tab-pane>
   </el-tabs>
 </template>
