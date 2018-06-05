@@ -11,7 +11,7 @@
         </el-select>
 
         <div class="v-movie">
-            <img :src="`${this.active}`" alt="">
+            <img :src="`${this.active}`" alt="" >
             <video :src="`${this.video}`" style="width:600px;min-height:400px" class="movie" controls autoplay></video>
             <img :src="`${this.active1}`" alt="">
         </div>
@@ -97,11 +97,13 @@ export default {
        min-height:400px;
        padding: 5px 10px;
     }
-    img {
-       
-        width: 200px;
-        min-height: 400px;
+    .v-movie {
+        img {
+                width: 180px;
+                min-height: 400px;
+            }
     }
+    
 }
 </style>
 

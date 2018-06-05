@@ -5,10 +5,10 @@
 				<el-col style="width:230px" class="logo" >
 					商场导购系统
 				</el-col>
-				<el-dropdown class="userinfo">
+				<el-dropdown class="userinfo" @click.native="logout">
 					<i class="el-icon-setting" ></i>
 					<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item divided @click.native="logout">{{loginId}}</el-dropdown-item>
+					<!-- <el-dropdown-item  >{{loginId}}</el-dropdown-item> -->
 					</el-dropdown-menu>
 				</el-dropdown>
 				<span class="userinfo" >{{userName}}</span>
@@ -24,12 +24,21 @@
 							<div v-if="index == 0">
 								<router-link :to="`${item.route}`">
 									<el-menu-item index="1-1">
-											<i class="el-icon-message"></i>{{item.name}}
+											<i class="el-icon-setting"></i>{{item.name}}
 									</el-menu-item>
 								</router-link>
 							</div>
+
+							<div v-else-if="index == 4">
+								<router-link :to="{ path: `${item.route}`, query:{ nameTra : userName }}">
+									<el-menu-item index="1-1">
+											<i class="el-icon-setting"></i>{{item.name}}
+									</el-menu-item>
+								</router-link>
+							</div>
+
 							<el-submenu index="1" v-else>
-								<template slot="title"><i class="el-icon-message"></i>{{item.name}}</template>
+								<template slot="title"><i class="el-icon-setting"></i>{{item.name}}</template>
 								<el-menu-item-group>
 									
 									<!-- <router-link :to="`${item.routeFirst}`"> -->
@@ -45,6 +54,8 @@
 									</router-link>
 								</el-menu-item-group>
 							</el-submenu>
+
+
 						</el-menu>
 					</div>
 				</el-menu>
@@ -100,30 +111,27 @@
                   routeSecond: '/user_table'
                 },
                 {
-                  name: '商品管理',
-                  first: '添加商品',
-                  second: '管理商品',
-                  third: '商品主页',
-                  route: '/main',
-                  routeFirst: '/goods_add',
-                  routeSecond: '/goods_table'
-                  
-                },
-                
-                // {
-                //   name: '商场活动推介管理',
-                //   first: '最新推广',
-                //   second: '活动',
-                //   routeFirst: '/active_table',
-                //   routeSecond: '/active_table'
-                // },
-                {
                   name: '商场管理',
                   first: '商场主页',
                   second: '商场',
                   routeFirst: '/market_home',
                   routeSecond: '/market_table'
                 },
+
+				{
+                  name: '品牌商铺管理',
+                  route: '/merchant'
+				},
+				 {
+                  name: '商品管理',
+                  first: '添加商品',
+                  second: '管理商品',
+                  route: '/main',
+                  routeFirst: '/goods_add',
+                  routeSecond: '/goods_table'
+                  
+                },
+
               ]
             }
             }
@@ -137,7 +145,7 @@
 			getParams() {
 				let name = this.$route.query.username;
 				this.userName = name;
-				if(name == ' ' || name == 'undefined' || name == '用户') {
+				if(name == '' || name == 'undefined' || name == '用户') {
 					this.loginId = '返回登录'
 				} else {
 					this.loginId = '退出登录'

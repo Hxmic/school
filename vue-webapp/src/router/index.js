@@ -22,6 +22,8 @@ const MarketHome = () => import(/* webpackChunkName: "out"*/ '@/views/marketHome
 const Location = () => import(/* webpackChunkName: "out"*/ '@/views/location')
 const Floor = () => import(/* webpackChunkName: "out"*/ '@/views/floor')
 
+const Merchant = () => import(/* webpackChunkName: "out"*/ '@/views/merchant')
+
 
 const ActiveTable = () => import(/* webpackChunkName: "out"*/ '@/views/activeTable')
 
@@ -116,6 +118,11 @@ export default new Router({
           path: '/floor',
           component: Floor,
           name: 'Floor'
+        },
+        {
+          path: '/merchant',
+          component: Merchant,
+          name: 'Merchant'
         }
       ]
     }

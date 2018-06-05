@@ -342,6 +342,22 @@ router.post('/add_merchant', function(req,res) {
     })
 })
 
+
+// 查询打折商品
+router.post('/query_discount', function(req, res) {
+    let params = req.body;
+
+    conn.query('select * from goodssql where  gdiscount = "' + params.discount + '"', function (err, rows) {
+        if (err || rows.length == 0) {
+            console.log(err)
+            res.send({data: 0})
+        } else {
+            res.send({data: rows})
+            console.log(rows)
+        }
+    })
+})
+
 router.get('*', (req, res) => {
     res.send('404');
 })

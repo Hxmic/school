@@ -168,3 +168,9 @@ import {timeFor} from '../util/util'
     }
   }
 </script>
+
+<style lang="less">
+.el-put-name {
+  width: 220px;
+}
+</style>

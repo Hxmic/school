@@ -13,7 +13,7 @@
     <el-form-item style="width:100%;">
       <el-button type="success" style="float:left;width:40%"  @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
-      <el-button  style="float:right;width:40%" @click="handleUser">用户登录</el-button>
+      <el-button  style="float:right;width:40%" @click="handleUser">取消</el-button>
     </el-form-item>
   </el-form>
 </template>

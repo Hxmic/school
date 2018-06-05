@@ -16,9 +16,9 @@
 
     </el-tab-pane>
 
-    <el-tab-pane label="入驻商家" name="merchant">
+    <!-- <el-tab-pane label="入驻商家" name="merchant">
         <mComponent></mComponent>
-    </el-tab-pane>
+    </el-tab-pane> -->
     
     <el-tab-pane label="一楼介绍" name="first">
         

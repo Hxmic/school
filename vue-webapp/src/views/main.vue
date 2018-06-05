@@ -1,7 +1,7 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="商场平面图" name="main">
-      商场平面图
+      <img src="../assets/dao.jpg" alt="" class="img">
     </el-tab-pane>
 
     <el-tab-pane label="活动推广" name="first">
@@ -15,10 +15,10 @@
 </template>
 <script>
 import VIDEO from '@/components/video'
-
+import DISCOUNT from '@/components/discount'
 
   export default {
-    components: { VIDEO },
+    components: { VIDEO, DISCOUNT },
     data() {
       return {
         activeName: 'main',
@@ -34,9 +34,8 @@ import VIDEO from '@/components/video'
 </script>
 
 <style>
-    img {
-        width: 540px;
-        height: 300px;
+    .img {
+        min-width: 600px;
     }
   .el-carousel__item h3 {
     color: #475669;
