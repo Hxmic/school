@@ -29,7 +29,7 @@
 								</router-link>
 							</div>
 
-							<div v-else-if="index == 4">
+							<div v-else-if="index == 3">
 								<router-link :to="{ path: `${item.route}`, query:{ nameTra : userName }}">
 									<el-menu-item index="1-1">
 											<i class="el-icon-setting"></i>{{item.name}}
@@ -104,18 +104,11 @@
                   routeSecond: '/location'
                 },
                 {
-                  name: '人员管理',
-                  first: '个人信息',
-                  second: '用户管理',
-                  routeFirst: '/person',
-                  routeSecond: '/user_table'
-                },
-                {
                   name: '商场管理',
                   first: '商场主页',
                   second: '商场',
-                  routeFirst: '/market_home',
-                  routeSecond: '/market_table'
+                  routeFirst: '/market_table',
+                  routeSecond: '/market_home'
                 },
 
 				{
@@ -130,6 +123,13 @@
                   routeFirst: '/goods_add',
                   routeSecond: '/goods_table'
                   
+                },
+				 {
+                  name: '人员管理',
+                  first: '个人信息',
+                  second: '用户管理',
+                  routeFirst: '/person',
+                  routeSecond: '/user_table'
                 },
 
               ]

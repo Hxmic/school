@@ -212,7 +212,7 @@ router.post('/query_disgoods', function(req, res) {
 // 添加商品
 router.post('/add_goods', function(req,res) {
     let params = req.body;
-    conn.query('insert into goodssql set ?', {gname: params.name,gdescribe:params.describe,gprice:params.price,gsale:params.sale,gdate:params.date,glocation:params.location,gperson:params.location}, function(err, rows) {
+    conn.query('insert into goodssql set ?', {gname: params.name,gdiscount:params.discount,gprice:params.price,gsale:params.sale,gdate:params.date,glocation:params.location,gperson:params.location}, function(err, rows) {
         if(err) {
             console.log(err);
             res.send({code: 0, ms: '服务器出错'})
@@ -257,7 +257,7 @@ router.post('/query_floor', function(req, res) {
 // 按条件查询商品
 router.post('/query_locg', function(req, res) {
     let params = req.body;
-    conn.query('select * from goodssql where gname like "%' + params.name + '%" and glocation like "' + params.location + '"', function (err, rows) {
+    conn.query('select * from goodssql where gname like "%' + params.name + '%" and glocation like "%' + params.location + '%"', function (err, rows) {
         if (err || rows.length == 0) {
             console.log(err)
             res.send({data: 0})
@@ -348,6 +348,31 @@ router.post('/query_discount', function(req, res) {
     let params = req.body;
 
     conn.query('select * from goodssql where  gdiscount = "' + params.discount + '"', function (err, rows) {
+        if (err || rows.length == 0) {
+            console.log(err)
+            res.send({data: 0})
+        } else {
+            res.send({data: rows})
+            console.log(rows)
+        }
+    })
+})
+
+// 修改品牌商铺信息
+router.post('/upd_merchant',function(req, res) {
+    let params = req.body;
+    
+    conn.query('update merchantsql set cname = "'+params.name + '" ,cactive = "' + params.active + '",cvideo = "' + params.video + '" ,cactive1 = "' + params.active1 + '"where cid = "' + params.cid + '"', function(err, result) {
+        !err ? res.send({code: 1}) : res.send({code: 0})
+
+    })
+})
+
+// 查询品牌商铺信息
+router.post('/query_merchant', function(req, res) {
+    let params = req.body;
+
+    conn.query('select * from merchantsql where  cname like "%' + params.name + '%"', function (err, rows) {
         if (err || rows.length == 0) {
             console.log(err)
             res.send({data: 0})

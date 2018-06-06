@@ -16,14 +16,14 @@
         prop="gname"
         label="商品名"
         sortable
-        width="100">
+        width="150">
         </el-table-column>
 
-        <el-table-column
+        <!-- <el-table-column
         prop="gdescribe"
         label="商品描述"
         width="150">
-        </el-table-column>
+        </el-table-column> -->
 
         <el-table-column
         prop="gprice"
@@ -44,7 +44,7 @@
         label="上架日期"
         :formatter="dateFormat"
         sortable
-        width="100">
+        width="150">
         </el-table-column>
 
         <el-table-column
@@ -56,7 +56,7 @@
         <el-table-column
         prop="glocation"
         label="商品位置"
-        width="100">
+        width="150">
         </el-table-column>
 
         <el-table-column
@@ -188,8 +188,6 @@ import {timeFor} from '../util/util'
             _this.tableData = info;
           })
         }
-       
-
       },
       // 打折促销查询
       queryDisGoodsInfo() {

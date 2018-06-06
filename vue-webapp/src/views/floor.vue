@@ -90,6 +90,8 @@
          },
 
          queryGoodsInfo() {
+             console.log(this.qname);
+             console.log(this.floor);
             let _this = this;
             let url = '/api/query_locg';
                 this.$http.post(url, {
@@ -97,6 +99,7 @@
                 location: this.floor
             },{}).then(function(data) {
                 let info = data.data.data;
+                console.log(info)
                 let len = info.length;
                 console.log(info.length)
                 if( len > 0) {

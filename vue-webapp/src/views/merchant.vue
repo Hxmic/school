@@ -52,7 +52,7 @@
             >
             <el-table-column
                 prop="cname"
-                label="商家名"
+                label="商铺名"
                 sortable
                 width="150">
             </el-table-column>
@@ -69,12 +69,30 @@
                 width="150">
             </el-table-column>
 
+             <el-table-column
+                prop="cactive"
+                label="活动"
+                width="150">
+            </el-table-column>
+
+            <el-table-column
+                prop="cvideo"
+                label="视频简介"
+                width="150">
+            </el-table-column>
+
+            <el-table-column
+                prop="cactive1"
+                label="视频简介"
+                width="150">
+            </el-table-column>
+
             
             <el-table-column label="操作" >
                 <template slot-scope="scope" v-show="operateFlag">
-                <!-- <el-button
+                <el-button
                     size="mini"
-                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
+                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 <el-button
                     size="mini"
                     type="danger"
@@ -86,31 +104,80 @@
 
 
         <div v-show="noMark">
-        <el-table
-            :data="tableData"
-            style="width: 100%"
-            :default-sort = "{prop: 'date', order: 'descending'}"
-            >
-            <el-table-column
-                prop="cname"
-                label="商家名"
-                sortable
-                width="150">
-            </el-table-column>
+            
+             <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="商铺名" v-model="qname">
+      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣）" v-model="qdiscount">
+       -->
+            <el-button type="primary" @click="queryMer">商铺查询</el-button>
 
-            <el-table-column
-                prop="clocation"
-                label="商家位置"
-                width="150">
-            </el-table-column>
+            <el-table
+                :data="tableData"
+                style="width: 100%"
+                :default-sort = "{prop: 'date', order: 'descending'}"
+                >
+                <el-table-column
+                    prop="cname"
+                    label="商家名"
+                    sortable
+                    width="200">
+                </el-table-column>
 
-            <el-table-column
-                prop="cimportant"
-                label="主要业务"
-                width="150">
-            </el-table-column>
-            </el-table>
+                <el-table-column
+                    prop="clocation"
+                    label="商家位置"
+                    width="200">
+                </el-table-column>
+
+                <el-table-column
+                    prop="cimportant"
+                    label="主要业务"
+                    width="200">
+                </el-table-column>
+
+                    <el-table-column label="" >
+                    <template slot-scope="scope" v-show="operateFlag">
+                
+                    </template>
+                </el-table-column>
+
+                </el-table>
         </div>
+
+
+          <el-dialog
+      title="修改商品信息"
+      :visible.sync="dialogVisible"
+      width="30%"
+     >
+     <div>
+       <div class="el-form-item">
+          <label class="el-form-item__label" style="width: 80px;">商铺名</label>
+          <input type="text" class="el-input__inner w-input" v-model="name">
+          <!-- <input type="text" v-model="goodsname"> -->
+       </div>
+       
+       <div class="el-form-item">
+          <label class="el-form-item__label" style="width: 80px;">活动</label>
+          <input type="text" class="el-input__inner w-input" v-model="active">
+       </div>
+
+       <div class="el-form-item">
+          <label class="el-form-item__label" style="width: 80px;">视频介绍</label>
+          <input type="text" class="el-input__inner w-input" v-model="video">
+       </div>
+
+        <div class="el-form-item">
+          <label class="el-form-item__label" style="width: 80px;">推广</label>
+          <input type="text" class="el-input__inner w-input" v-model="active1">
+       </div>
+     </div>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editConfirm">修 改</el-button>
+      </span>
+    </el-dialog>
+
     </div>
  
   
@@ -158,7 +225,15 @@
         mark: true,
         flag: false,
         noMark: true,
-        lUrl: 'http://localhost/'
+        lUrl: 'http://localhost/',
+        dialogVisible: false,
+        name: '',
+        active: '',
+        video: '',
+        active1: '',
+        listIndex: '',
+        editObj:[{}],
+        qname: '',
       }
     },
     mounted() {
@@ -170,10 +245,25 @@
         return row.address;
       },
 
+      queryMer() {
+        let _this = this;
+        let url = '/api/query_merchant';
+        if(this.qname == '') {
+          this.$message.error('查询数据不能为空');
+        } else{
+            this.$http.post(url, {
+            name: this.qname,
+            // location: this.qlocation
+          },{}).then(function(data) {
+            let info = data.data.data;
+            _this.tableData = info;
+          })
+        }
+      },
+
        getName() {
            let name = this.$route.query.nameTra;
           //  this.userName = name;
-           console.log(name);
             if(name == ' ' || name == undefined || name == '用户' ) {
               this.mark = false;
               this.noMark = true;
@@ -222,7 +312,6 @@
                   active1: activeB,
                   video: video
                 },{}).then(function(data) {
-                  console.log(data.body.code);
                   if(data.body.code == 0) {
                     this.$message.error('添加失败');
                   } else {
@@ -248,13 +337,11 @@
       },
 
       handleDelete(index, row) {
-        console.log(row.aid)
         let url = '/api/del_merchant'
         this.$http.post(url, {
           cid : row.cid,
         }, {}).then(function(data) {
           let num = data.data.code;
-          console.log(num + 'num')
           if(num == 1) {
             this.$message.success('删除成功');
             this.queryMerchant();
@@ -263,6 +350,45 @@
           }
         })
       },
+
+
+       // 弹出修改品牌商铺的模态框
+     handleEdit(index, row) {
+      
+       this.listIndex = row.cid;
+       this.editObj = row;
+       // 此处报为先定义的错误
+       this.name = row.cname;
+       this.active = row.cactive;
+       this.video = row.cvideo;
+       this.active1 = row.cactive1;
+       
+       
+       this.dialogVisible = true;
+     },
+     // 确认修改商铺
+     editConfirm() {
+
+       let _this = this;
+       let url = 'api/upd_merchant';
+       this.$http.post(url, {
+         name: _this.name,
+         active: _this.active,
+         video: _this.video,
+         active1: _this.active1,
+         cid: _this.listIndex
+       },{}).then(function(data) {
+         let mark = data.body.code;
+         if(mark == 1) {
+           this.$message.success('修改成功');
+           this.queryMerchant();
+
+         } else {
+           this.$message.error('修改失败');
+         }
+       })
+       this.dialogVisible = false;
+     },
 
     }
   }

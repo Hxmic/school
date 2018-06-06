@@ -16,7 +16,7 @@
         prop="gname"
         label="商品名"
         sortable
-        width="150">
+        width="200">
         </el-table-column>
 
         <!-- <el-table-column
@@ -28,7 +28,7 @@
         <el-table-column
         prop="gprice"
         label="商品价格"
-        width="100">
+        width="200">
         </el-table-column>
 
 
@@ -44,19 +44,19 @@
         label="上架日期"
         :formatter="dateFormat"
         sortable
-        width="150">
+        width="200">
         </el-table-column>
 
         <el-table-column
         prop="gdiscount"
         label="打折"
-        width="100">
+        width="200">
         </el-table-column>
 
         <el-table-column
         prop="glocation"
         label="商品位置"
-        width="150">
+        width="200">
         </el-table-column>
 
         <!-- <el-table-column

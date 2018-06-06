@@ -8,8 +8,8 @@
                 <el-input v-model="ruleForm.name"></el-input>
             </el-form-item>
             
-            <el-form-item label="商品描述" prop="describe">
-                <el-input v-model="ruleForm.describe"></el-input>
+            <el-form-item label="打折" prop="discount">
+                <el-input v-model="ruleForm.discount"></el-input>
             </el-form-item>
 
             <el-form-item label="商品价格" prop="price">
@@ -40,7 +40,7 @@
       return {
         ruleForm: {
           name: '',
-          describe: '',
+          discount: '',
           price: '',
           sale: '',
           location: '',
@@ -51,7 +51,7 @@
             { required: true, message: '请输入商品名', trigger: 'blur' },
           ],
         
-           describe: [
+           discount: [
             { required: true, message: '请输入商品描述', trigger: 'blur' },
           ],
 
@@ -80,7 +80,7 @@
             var url = '/api/add_goods';
                 this.$http.post(url, {
                   name: this.ruleForm.name,
-                  describe: this.ruleForm.describe,
+                  discount: this.ruleForm.discount,
                   location: this.ruleForm.location,
                   price: this.ruleForm.price,
                   sale: this.ruleForm.sale,
