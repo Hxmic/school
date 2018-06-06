@@ -44,7 +44,7 @@ export default {
                 cvideo: '',
                 cactive1: '',
             }, ],
-            value: '佳佳乐',
+            value: '格力',
             active: '',
             video: '',
             active1: '',
