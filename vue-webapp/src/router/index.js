@@ -26,6 +26,8 @@ const Merchant = () => import(/* webpackChunkName: "out"*/ '@/views/merchant')
 
 
 const ActiveTable = () => import(/* webpackChunkName: "out"*/ '@/views/activeTable')
+const Phone = () => import(/* webpackChunkName: "out"*/ '@/views/phone')
+
 
 // const Table = () => import(/* webpackChunkName: "out"*/ '@/views/table')
 
@@ -123,6 +125,11 @@ export default new Router({
           path: '/merchant',
           component: Merchant,
           name: 'Merchant'
+        },
+        {
+          path: '/phone',
+          component: Phone,
+          name: 'Phone'
         }
       ]
     }

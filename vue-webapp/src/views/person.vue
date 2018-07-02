@@ -141,8 +141,6 @@
             } else {
               _this.sexInput = '女'
             }
-
-
             this.$http.post(url, {
               name: _this.ruleForm.name,
               sex: _this.sexInput,

@@ -97,7 +97,7 @@ router.post('/add_user', function(req, res) {
     conn.query('select aname from adminsql where aname="' + params.username + '"', function(err, rows) {
         if(err || rows.length == 0) {
             console.log(err);
-            conn.query('insert into adminsql set ?', {aname: params.username,asex:params.sex, abirth:params.birth,}, function(err, rows) {
+            conn.query('insert into adminsql set ?', {aname: params.username,asex:params.sex, abirth:params.birth,apwd:params.pwd}, function(err, rows) {
                 if(err) {
                     console.log(err);
                     res.send({code: 0, ms: '服务器出错'})
@@ -381,6 +381,20 @@ router.post('/query_merchant', function(req, res) {
             console.log(rows)
         }
     })
+})
+
+
+router.post('/add_phoneinfo', function(req, res) {
+    let params = req.body;
+    conn.query('insert into phoneinfo set ?', {height: params.height,width:params.width, ua:params.ua}, function(err, rows) {
+        if(err) {
+            console.log(err);
+            res.send({code: 0, ms: '服务器出错'})
+        } else {
+             res.send({code: 1})
+        }
+    })
+        
 })
 
 router.get('*', (req, res) => {

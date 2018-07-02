@@ -3,7 +3,7 @@
   <div v-show="mark">
 
     <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="用户名" v-model="uname">
-      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="最低折扣）" v-model="qdiscount">
+      <!-- <input type="text" autocomplete="off" class="el-input__inner el-put-name" placeholder="密码" v-model="pwd">
        -->
       <el-button type="primary" @click="addAdmin">添加管理员</el-button>
 
@@ -76,6 +76,7 @@ import {timeFor} from '../util/util'
         sex: '男',
         uname: '',
         birth: '2018-06-07',
+        pwd: '123'
       }
     },
     mounted() {
@@ -125,7 +126,8 @@ import {timeFor} from '../util/util'
             this.$http.post(url, {
                   username: _this.uname,
                   sex: _this.sex,
-                  birth: _this.birth
+                  birth: _this.birth,
+                  pwd: this.pwd
                 },{}).then(function(data) {
                   console.log(data.body.code);
                   if(data.body.code == 0) {
@@ -143,7 +145,11 @@ import {timeFor} from '../util/util'
       handleDelete(index, row) {
         console.log(row.aid)
         let url = '/api/del_admin'
-        this.$http.post(url, {
+
+        if(this.userName != 'admin') {
+          this.$message.error('没有操作权限')
+        } else {
+           this.$http.post(url, {
           aid : row.aid,
         }, {}).then(function(data) {
           let num = data.data.code;
@@ -155,6 +161,8 @@ import {timeFor} from '../util/util'
             this.$message.success('删除失败');
           }
         })
+        }
+       
       },
 
       dateFormat(row, column) {

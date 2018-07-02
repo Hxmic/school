@@ -6,9 +6,10 @@
             <p>高度：<span>{{this.h}}</span> </p>
             <p>宽度：<span>{{this.w}}</span> </p>
             <p>UA: <span>{{this.UA}}</span></p>
+            <!-- <p>名称: <span>{{this.name}}</span></p> -->
+
         </div>
         
-        <button @click="updPhoneInfo">上传</button>
 
     </div>
 </template>
@@ -44,23 +45,6 @@ export default {
             // this.name = name;
         },
 
-        updPhoneInfo() {
-            let _this = this;
-            var url = '/api/add_phoneinfo';
-                this.$http.post(url, {
-                  height: _this.h,
-                  width: _this.w,
-                  ua: _this.UA
-                },{}).then(function(data) {
-                //   console.log(data.body.code);
-                  if(data.body.code == 0) {
-                    alert('添加失败')
-                  } else {
-                    alert('添加成功')
-                  }
-                })
-        },
-
 
         setMinHeight() {
             const root = this.$refs.root;
@@ -79,11 +63,6 @@ export default {
 </script>
 
 <style>
-
-button {
-    width: 50px;
-    height: 25px;
-}
 p {
     font-size: 0.3rem;
 }
@@ -92,4 +71,3 @@ span {
 }
 </style>
 
-  
